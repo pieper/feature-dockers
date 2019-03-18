@@ -17,8 +17,8 @@ UKF_CLI_PREFIX="${SLICER_PATH} --launch ${S4EXT}/${UKF}/lib/Slicer-4.10/cli-modu
 # TODO: make these parameters of the process along with any other calculation options
 #
 # Download the fiber clustering atlas at https://github.com/SlicerDMRI/ORG-Atlases
-curl -L 'https://github.com/SlicerDMRI/ORG-Atlases/releases/download/v1.0/ORG-2000FC-100HCP.tar.gz' > ORG-2000FC-100HCP.tar.gz
-tar xfz ORG-2000FC-100HCP.tar.gz
+curl -L 'https://github.com/SlicerDMRI/ORG-Atlases/releases/download/v1.0/ORG-800FC-100HCP.tar.gz' > ORG-800FC-100HCP.tar.gz
+tar xfz ORG-800FC-100HCP.tar.gz
 curl -L 'https://github.com/SlicerDMRI/ORG-Atlases/releases/download/v1.0/ORG-RegAtlas-100HCP.tar.gz' > ORG-RegAtlas-100HCP.tar.gz
 tar xfz ORG-RegAtlas-100HCP.tar.gz
 # get the data to analyze
@@ -63,8 +63,6 @@ python ${WMA_PATH}/wm_harden_transform.py -i \
   fiber_clustering_outlier_removed/UKF_tractography_reg_outlier_removed/ \
   fiber_clustering_outlier_removed_in_DWISpace/ \
   $SLICER_PATH
-
-
 
 echo done
 
