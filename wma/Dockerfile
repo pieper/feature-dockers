@@ -35,7 +35,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     && \
   apt-get clean
 
-# install dependencie explicitly (fails when loaded via setup.py)
+# install dependencies explicitly (fails when loaded via setup.py)
 RUN pip install cython
 RUN pip install numpy
 RUN pip install scipy

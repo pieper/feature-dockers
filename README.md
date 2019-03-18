@@ -8,7 +8,9 @@ Docker files for feature analysis routines (e.g. white matter analysis and sift-
 
 ## for testing
 
-`./build.sh; docker rm -f wma; docker run -it --name wma stevepieper/wma /home/researcher/wmademo.sh`
+```
+./build.sh; docker rm -f wma; docker run -it --name wma stevepieper/wma /home/researcher/wmademo.sh
+```
 
 ## Thanks
 
