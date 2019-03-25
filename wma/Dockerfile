@@ -8,13 +8,13 @@ ENV S4EXT=$S4EXT
 RUN mkdir $S4EXT
 
 # UKF
-RUN (cd $S4EXT; \ 
+RUN (cd $S4EXT; \
      wget "http://slicer.kitware.com/midas3/download/index?items=410389" -O ext.tar.gz && \
      tar xvfz ext.tar.gz; rm ext.tar.gz)
 ENV UKF="27931-linux-amd64-UKFTractography-gitf21af73-2019-01-16"
 
 # DMRI
-RUN (cd $S4EXT; \ 
+RUN (cd $S4EXT; \
      wget "http://slicer.kitware.com/midas3/download/index?items=410339" -O ext.tar.gz && \
      tar xvfz ext.tar.gz; rm ext.tar.gz)
 ENV DMRI="27931-linux-amd64-SlicerDMRI-git9d3e244-2019-01-30"
@@ -45,16 +45,20 @@ RUN pip install statsmodels
 RUN pip install xlrd
 RUN pip install matplotlib
 
-# install whitematteranalysis (brings in pre-requisites)
-#RUN pip install git+https://github.com/SlicerDMRI/whitematteranalysis.git
+# install whitematteranalysis (brings in pre-requisites for running wma scripts)
+RUN pip install git+https://github.com/SlicerDMRI/whitematteranalysis.git
 
-# check out repository to access scripts
-RUN (cd /home/researcher; \
-  git clone git://github.com/SlicerDMRI/whitematteranalysis; \
-  ( cd whitematteranalysis; \
-    python setup.py install \
-    ) \
-  )
+# check out repository to access latest customized scripts
+RUN ( \
+  cd /home/researcher \
+  git clone git://github.com/SlicerDMRI/whitematteranalysis \
+  ( cd whitematteranalysis; git checkout 06270b072d44f4b087b0f92288a9083d0f4d7090 )
+)
 
+# install the demo driver script and set up job to run via xinit
 COPY wmademo.sh /home/researcher
 RUN chown -R researcher:researcher /home/researcher/wmademo.sh
+
+COPY xinitrc /home/researcher/.xinitrc
+RUN chown -R researcher:researcher /home/researcher/.xinitrc
+RUN chmod +x /home/researcher/.xinitrc
